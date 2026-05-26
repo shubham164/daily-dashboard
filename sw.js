@@ -1,6 +1,6 @@
 // Daily Dashboard service worker
 // Bump CACHE_VERSION whenever you deploy a new version to force an update.
-const CACHE_VERSION = 'daily-dashboard-v3';
+const CACHE_VERSION = 'daily-dashboard-v5';
 const ASSETS = [
   './',
   './index.html',
