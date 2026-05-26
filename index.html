@@ -1214,17 +1214,19 @@
     display: flex; align-items: center; justify-content: center;
     transition: 0.15s; padding: 0;
   }
-  .h-status-btn svg { width: 16px; height: 16px; transition: 0.15s; }
+  .h-status-btn svg { width: 16px; height: 16px; transition: 0.15s; opacity: 0; }
   .h-status-btn.check { border-color: #c4e3cc; }
   .h-status-btn.check svg { stroke: #2d6a3e; }
   .h-status-btn.check:hover { background: #d4edda; border-color: #2d6a3e; }
+  .h-status-btn.check:hover svg { opacity: 0.4; }
   .habit.done .h-status-btn.check { background: #2d6a3e; border-color: #2d6a3e; }
-  .habit.done .h-status-btn.check svg { stroke: white; }
+  .habit.done .h-status-btn.check svg { stroke: white; opacity: 1; }
   .h-status-btn.cross { border-color: #f0c4be; }
   .h-status-btn.cross svg { stroke: #c0392b; }
   .h-status-btn.cross:hover { background: #fae3e0; border-color: #c0392b; }
+  .h-status-btn.cross:hover svg { opacity: 0.4; }
   .habit.missed .h-status-btn.cross { background: #c0392b; border-color: #c0392b; }
-  .habit.missed .h-status-btn.cross svg { stroke: white; }
+  .habit.missed .h-status-btn.cross svg { stroke: white; opacity: 1; }
   .h-actions { display: flex; gap: 4px; margin-left: 4px; opacity: 0; transition: opacity 0.2s; }
   .habit:hover .h-actions { opacity: 1; }
   .h-icon-btn {
@@ -1249,7 +1251,7 @@
     .locked-heading { font-size: 14px; padding: 14px; }
     .form-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
     th, td { padding: 9px 7px; font-size: 12px; }
-    .top-tab { font-size: 11px; padding: 8px 10px; min-width: 100px; }
+    .top-tab { flex: 0 0 auto; min-width: auto; font-size: 12px; padding: 9px 12px; }
     .disc-stats { grid-template-columns: 1fr 1fr; }
     .d-stat .value, .e-stat .value, .f-stat .value, .h-stat .value { font-size: 18px; }
     .h-progress-bar { width: 60px; }
@@ -1279,9 +1281,10 @@
   @media (max-width: 480px) {
     /* Stack the goal form to one column */
     .form-grid { grid-template-columns: 1fr; }
-    /* Top tabs: shrink so all fit without horizontal scroll */
-    .top-switcher { gap: 2px; padding: 4px; border-radius: 12px; margin-bottom: 14px; }
-    .top-tab { flex: 1 1 0; min-width: 0; font-size: 10px; padding: 8px 4px; }
+    /* Top tabs: keep readable size, scroll horizontally (don't squish) */
+    .top-switcher { gap: 4px; padding: 5px; border-radius: 12px; margin-bottom: 14px; }
+    .top-tab { flex: 0 0 auto; min-width: auto; font-size: 12px; padding: 9px 12px; }
+    .data-btns { flex: 0 0 auto; }
     /* Main Goal table: drop the % column visually but keep it readable */
     table { min-width: 560px; }
     th, td { padding: 8px 6px; font-size: 11px; }
@@ -1294,8 +1297,15 @@
     .focus-wrap h1 { font-size: 22px; }
     .subtitle, .disc-header .subtitle, .goal-header .subtitle { font-size: 12px; }
     /* Timer card: full width inputs */
-    .timer-inputs { flex-direction: column; align-items: stretch; gap: 8px; }
-    .timer-set-btn { width: 100%; }
+    .timer-inputs { flex-direction: row; flex-wrap: wrap; align-items: flex-end; gap: 8px; }
+    .timer-field { flex: 1 1 0; min-width: 0; }
+    .timer-field input[type=time] { width: 100%; }
+    .timer-set-btn { width: 100%; flex: 1 1 100%; }
+
+    /* ── Habit add row: keep + Add button fully on screen ── */
+    .add-row-h { gap: 6px; }
+    .add-input-h { min-width: 0; }
+    .add-btn-h { flex-shrink: 0; padding: 0 14px; }
 
     /* ── Habit rows: keep buttons on screen ── */
     .habit { gap: 6px; padding: 10px 10px; flex-wrap: wrap; }
